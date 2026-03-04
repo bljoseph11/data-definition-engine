@@ -1,4 +1,4 @@
-Solution Overview
+# Solution Overview
 
 ## Introduction
 The Data Definition Engine (DDE) is a software tool being created by the Define-XML/CRF Generation sub-team of the 
@@ -129,8 +129,8 @@ DDS is the model at the center of the DDE solution. Loading the DDS will require
 
 The use of many new models in this process raises further challenges as they are unfamiliar to implementers and not yet 
 mature. The DDS is drafted but not final. Using USDM + BCs + DSSs to generate study content represents the use of 
-unfamiliar models in new workflows. Even more dramatic will be the use of the AC/DC models to generate the ADaM 
-datasets.
+unfamiliar models in new workflows. Even more dramatic will be the use of the Derivation Concept (DC) models to generate 
+the ADaM datasets.
 
 Once complete, the DDS provides the metadata for a wide range of study processing scenarios. Therefore, in addition to 
 the need for an extensible set of metadata loaders, the DDE will require a set of generators to create different 
@@ -191,11 +191,10 @@ when generated outputs contain unexpected content, and provides the foundation f
 sources supply values for the same metadata element.
 
 ## Incremental Generating
-A nice to have might also include incremental generation where new content is added to an existing artifact. For 
-example, if there's a change that triggers the need to update a define.xml, but that define.xml has been updated 
-manually or by another system, then the ability to add the new changes to the older define.xml has utility. This 
-could work similar to GitHub, where a diff is generated and if possible, the updates are merged into the existing 
-version.
+Incremental generation could allow new content to be added to an existing artifact. For example, if there's a change 
+that triggers the need to update a define.xml, but that define.xml has been updated manually or by another system, then 
+the ability to add the new changes to the older define.xml has utility. This could work similar to GitHub, where a diff 
+is generated and if possible, the updates are merged into the existing version.
 
 ## Quality and Conformance
 Once a DDS is populated, we will add checks to determine the state of the DDS content to support generating specific 
