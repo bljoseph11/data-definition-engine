@@ -1,0 +1,100 @@
+---
+title: Data Definition Engine (DDE) Architecture
+---
+graph LR
+    subgraph Sources["Metadata Sources"]
+        USDM["USDM Study Design"]
+        BC["Biomedical Concepts"]
+        DSS["Dataset Specializations"]
+        XLS["Metadata Spreadsheets"]
+        DEF_IN["Define-XML Files"]
+        CRF_IN["Template CRFs"]
+        DC["DC for ADaM"]
+        CLIB["CDISC Library"]
+        GAP["Phase 1 Gap Metadata"]
+    end
+
+    subgraph Loaders["Loaders"]
+        L1["USDM + BC + DSS\nLoader"]
+        L2["Spreadsheet\nLoader"]
+        L3["Define-XML\nLoader"]
+        L4["Template CRF\nLoader"]
+        L5["DC/ADaM\nLoader"]
+        L6["Gap Metadata\nLoader"]
+        LP["Custom Plugins"]
+    end
+
+    subgraph Core["DDE Core"]
+        DDS[("Data Definition\nSpecification\n(DDS)\nJSON Model")]
+        QC["Quality &\nConformance\nChecks"]
+    end
+
+    subgraph Generators["Generators"]
+        G1["SDTM Define-XML\nGenerator"]
+        G2["ADaM Define-XML\nGenerator"]
+        G3["ODM CRF\nGenerator"]
+        G4["Trial Design\nDataset Generator"]
+        G5["Dataset-JSON\nShell Generator"]
+        GP["Custom Plugins"]
+    end
+
+    subgraph Artifacts["Study Artifacts"]
+        A1["SDTM\nDefine-XML"]
+        A2["ADaM\nDefine-XML"]
+        A3["ODM CRFs"]
+        A4["Trial Design\nDatasets"]
+        A5["Dataset-JSON\nShells"]
+    end
+
+    %% Source to Loader connections
+    USDM --> L1
+    BC --> L1
+    DSS --> L1
+    XLS --> L2
+    DEF_IN --> L3
+    CRF_IN --> L4
+    DC --> L5
+    GAP --> L6
+    CLIB -.->|"Referenced by\nmultiple loaders"| Loaders
+
+    %% Loaders to DDS
+    L1 --> DDS
+    L2 --> DDS
+    L3 --> DDS
+    L4 --> DDS
+    L5 --> DDS
+    L6 --> DDS
+    LP --> DDS
+
+    %% DDS to QC
+    DDS <--> QC
+
+    %% DDS to Generators
+    DDS --> G1
+    DDS --> G2
+    DDS --> G3
+    DDS --> G4
+    DDS --> G5
+    DDS --> GP
+
+    %% Generators to Artifacts
+    G1 --> A1
+    G2 --> A2
+    G3 --> A3
+    G4 --> A4
+    G5 --> A5
+
+    %% Styling
+    classDef source fill:#4a90d9,stroke:#2c5f8a,color:#fff
+    classDef loader fill:#7b68ee,stroke:#5a4cb5,color:#fff
+    classDef core fill:#e8a838,stroke:#b8832c,color:#fff
+    classDef generator fill:#50b86c,stroke:#3a8a50,color:#fff
+    classDef artifact fill:#e06060,stroke:#b04545,color:#fff
+    classDef plugin fill:#888,stroke:#666,color:#fff,stroke-dasharray: 5 5
+
+    class USDM,BC,DSS,XLS,DEF_IN,CRF_IN,DC,CLIB,GAP source
+    class L1,L2,L3,L4,L5,L6 loader
+    class DDS,QC core
+    class G1,G2,G3,G4,G5 generator
+    class A1,A2,A3,A4,A5 artifact
+    class LP,GP plugin
