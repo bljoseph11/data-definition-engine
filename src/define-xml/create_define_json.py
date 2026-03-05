@@ -16,7 +16,6 @@ import os
 import argparse
 import hashlib
 import yaml
-import copy
 from jsonata import Jsonata
 from cdisc_library_client import CDISCLibraryClient
 from collections import defaultdict
