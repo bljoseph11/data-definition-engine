@@ -1,4 +1,4 @@
-# USDM to Define-360i JSON Processor
+# USDM to Define-JSON Processor
 
 This script transforms a [USDM](https://www.cdisc.org/standards/foundational/usdm) (Unified Study Data Model) JSON file into a Define-JSON structure. 
 
