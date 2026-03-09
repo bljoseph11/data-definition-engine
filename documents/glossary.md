@@ -14,5 +14,7 @@ An Extensible Markup Language format that stores and transmits metadata of tabul
 Operational Data Model format that stores clinical data in Case Report Forms.
 
 ## Dataset-JSON shells
+Data structure templates that can store clinical data in Dataset-JSON format. 
 
 ## Trial Design datasets
+Datasets that lay out the design and timeline of a clinical trial. 
